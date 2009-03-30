@@ -1,0 +1,10 @@
+#!/usr/bin/python
+#
+# 12tweet - tiny little robots that live in the twittersphere
+# Created by Jeff Verkoeyen @featherless
+#
+# This allows for per-box configurations to exist.
+#
+
+in_dev = True
+
