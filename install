@@ -1,0 +1,12 @@
+cd mysql
+python setup.py build
+python setup.py install
+
+cd simplejson
+python setup.py build
+python setup.py install
+
+cd twitter
+python setup.py build
+python setup.py install
+

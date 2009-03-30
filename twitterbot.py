@@ -131,7 +131,7 @@ class StandardBot(object):
                     row = self.cursor.fetchone()
                     user = self.dbToUser(row)
                     self.addExistingUser(user, user['screen_name'], user['active'])
-                    self.notifyUser(screen_name, "Thanks for following, you can now access all of the findpassion features!")
+                    self.notifyUser(screen_name, "Thanks for following another 1-2-tweet bot! Find more at http://12tweet.com/")
 
 
         ################################

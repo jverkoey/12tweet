@@ -1,0 +1,50 @@
+Hello! Thanks for checking out 1-2-tweet!
+
+Let's cut to the chase. 1-2-tweet is a project that
+makes it possible to build twitter bots. Think IRC
+or AIMbots, except more buzz-termy.
+
+So how do you go about getting this running on your
+box? Should be simple, let's start.
+
+First off, you're going to need python. Make sure
+you can start up python from the command line.
+
+> python
+Python 2.x.x (version garble)
+[GCC garble]
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+
+You should see something at least similar to the
+above. If not, go ahead and download it.
+http://www.python.org/download/
+
+With python in hand, run the following set of
+commands to install the required libraries:
+
+cd mysql
+python setup.py build
+python setup.py install
+
+cd simplejson
+python setup.py build
+python setup.py install
+
+cd twitter
+python setup.py build
+python setup.py install
+
+If any of these fail, just do the standard Google search
+and you should fine solutions.
+
+While these are running, you should get mysql running
+on your box so that you can interact with a database.
+
+Import schema/12tweet.sql into a database and it will
+create skeletons of the necessary tables for running
+example.py.
+
+Now with everything installed, you can create your bot!
+Check out twitterbot.py to see examples.
+
