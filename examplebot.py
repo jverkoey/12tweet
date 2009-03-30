@@ -42,11 +42,3 @@ class Bot(twitterbot.StandardBot):
                 # Someone who isn't following us has sent us a reply.
                 print "I don't know this person: " + tweet.user.screen_name
 
-
-    # We translate the db row into a user object for simplicity's sake.
-    def dbToUser(self, row):
-        return {
-            'id': row[0],
-            'screen_name': row[1],
-            'active': row[2],
-            'is_admin': row[3]}

@@ -69,6 +69,31 @@ class StandardBot(object):
         self.updateUserLists()
 
 
+    '''Implement this function in your class to override
+       the message.
+    '''
+    def msgWelcomeNewUser(self, screen_name):
+        self.notifyUser(screen_name, "Thanks for following another 1-2-tweet bot! Find more at http://12tweet.com/")
+
+
+    '''Implement this function in your class to override
+       the message.
+    '''
+    def msgWelcomeBackUser(self, screen_name):
+        self.notifyUser(screen_name, "Welcome back! We've kept your profile safely tucked away")
+
+
+    '''Implement this function in your class if you have
+       other parameters stored in the user row.
+    '''
+    def dbToUser(self, row):
+        return {
+            'id': row[0],
+            'screen_name': row[1],
+            'active': row[2],
+            'is_admin': row[3]}
+
+
     def updateUserLists(self):
         ################################
         # Get all existing followers.
@@ -118,7 +143,7 @@ class StandardBot(object):
                 if screen_name in self.disabled_users:
                     print "Reactivating " + screen_name
                     self.cursor.execute("UPDATE followers SET active=1 WHERE screen_name=%s", (screen_name))
-                    self.notifyUser(screen_name, "Welcome back! We've kept your profile safely tucked away")
+                    self.msgWelcomeBackUser(screen_name)
 
                     user = self.disabled_users[screen_name]
                     del self.disabled_users[screen_name]
@@ -131,7 +156,7 @@ class StandardBot(object):
                     row = self.cursor.fetchone()
                     user = self.dbToUser(row)
                     self.addExistingUser(user, user['screen_name'], user['active'])
-                    self.notifyUser(screen_name, "Thanks for following another 1-2-tweet bot! Find more at http://12tweet.com/")
+                    self.msgWelcomeNewUser(user['screen_name'])
 
 
         ################################
@@ -145,7 +170,7 @@ class StandardBot(object):
                 newly_deactivated[screen_name] = True
                 self.cursor.execute("UPDATE followers SET active=0 WHERE screen_name=%s", (screen_name))
                 # The user has stopped following us, so they won't even see this update.
-                #notifyUser(screen_name, "Thanks for using findpassion!")
+                #notifyUser(screen_name, "Thanks for using another 1-2-tweet bot!")
 
         # We move the users to the disabled map here because
         # we can't remove elements from a map while traversing it
@@ -153,7 +178,6 @@ class StandardBot(object):
             user = self.existing_users[screen_name]
             del self.existing_users[screen_name]
             self.disabled_users[screen_name] = user
-
 
 
     def notifyUser(self, screen_name, message):
